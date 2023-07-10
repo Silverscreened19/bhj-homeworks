@@ -3,7 +3,8 @@ const nextArrow = document.querySelector(".slider__arrow_next");
 const backArrow = document.querySelector(".slider__arrow_prev");
 const dots = Array.from(document.getElementsByClassName("slider__dot"));
 
-let currentImg = 0;
+let currentImg = images.findIndex((item) => item.className = "slider__item slider__item_active");
+
 
 function removeActive() {
     images[currentImg].classList.remove("slider__item_active");
