@@ -3,41 +3,42 @@ const nextArrow = document.querySelector(".slider__arrow_next");
 const backArrow = document.querySelector(".slider__arrow_prev");
 const dots = Array.from(document.getElementsByClassName("slider__dot"));
 
-let currentImg = images.findIndex((item) => item.className = "slider__item slider__item_active");
 
-
-function removeActive() {
-    images[currentImg].classList.remove("slider__item_active");
-    dots[currentImg].classList.remove("slider__dot_active");
+function removeActive(slide) {
+    images[slide].classList.remove("slider__item_active");
+    dots[slide].classList.remove("slider__dot_active");
 }
 
-function addActive() {
-    images[currentImg].classList.add("slider__item_active");
-    dots[currentImg].classList.add("slider__dot_active");
+function addActive(slide) {
+    images[slide].classList.add("slider__item_active");
+    dots[slide].classList.add("slider__dot_active");
 }
 
 nextArrow.onclick = () => {
-    removeActive()
+    let currentImg = images.findIndex((item) => item.classList.contains("slider__item_active"));
+    removeActive(currentImg)
     currentImg++;
     if (currentImg >= images.length) {
         currentImg = 0;
     }
-    addActive();
+    addActive(currentImg);
 }
 
 backArrow.onclick = () => {
-    removeActive()
+    let currentImg = images.findIndex((item) => item.classList.contains("slider__item_active"));
+    removeActive(currentImg)
     currentImg--;
     if (currentImg < 0) {
         currentImg = images.length - 1;
     }
-    addActive();
+    addActive(currentImg);
 }
 
 dots.forEach(function (dot, i) {
     dot.onclick = () => {
-        removeActive();
+        let currentImg = images.findIndex((item) => item.classList.contains("slider__item_active"));
+        removeActive(currentImg);
         currentImg = i;
-        addActive();
+        addActive(currentImg);
     }
 })
