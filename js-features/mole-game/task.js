@@ -7,9 +7,8 @@ function setDefault() {
 }
 
 function moleGame() {
-    getHole = index => document.getElementById(`hole${index}`)
-    for (let i = 1; i <= 9; i++) {
-        hole = getHole(i)
+    for (let i = 0; i < 9; i++) {
+        const hole = document.getElementById(`hole${i+1}`)
         hole.onclick = () => {
             if (hole.classList.contains('hole_has-mole') == true) {
                 dead.textContent = Number(dead.textContent) + 1
