@@ -5,6 +5,8 @@ class Game {
     this.winsElement = container.querySelector('.status__wins');
     this.lossElement = container.querySelector('.status__loss');
 
+    this.timerElement = container.querySelector('.timer');
+
     this.reset();
 
     this.registerEvents();
@@ -14,6 +16,7 @@ class Game {
     this.setNewWord();
     this.winsElement.textContent = 0;
     this.lossElement.textContent = 0;
+
   }
 
   registerEvents() {
@@ -34,8 +37,19 @@ class Game {
     })
   }
 
+  timer() {
+    this.timerElement.textContent = this.wordElement.textContent.length;
+    this.timerId = setInterval(() => {
+      this.timerElement.textContent --;
+      if (this.timerElement.textContent < 1) {
+        this.fail()
+      }
+    }, 1000)
+  }
+
 
   success() {
+    clearInterval(this.timerId);
     if (this.currentSymbol.classList.contains("symbol_current")) this.currentSymbol.classList.remove("symbol_current");
     this.currentSymbol.classList.add('symbol_correct');
     this.currentSymbol = this.currentSymbol.nextElementSibling;
@@ -53,6 +67,7 @@ class Game {
   }
 
   fail() {
+    clearInterval(this.timerId);
     if (++this.lossElement.textContent === 5) {
       alert('Вы проиграли!');
       this.reset();
@@ -95,6 +110,7 @@ class Game {
     this.wordElement.innerHTML = html;
 
     this.currentSymbol = this.wordElement.querySelector('.symbol_current');
+    this.timer()
   }
 }
 
