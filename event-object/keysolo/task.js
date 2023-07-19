@@ -42,7 +42,7 @@ class Game {
     this.timerId = setInterval(() => {
       this.timerElement.textContent --;
       if (this.timerElement.textContent < 1) {
-        this.fail()
+        this.fail();
       }
     }, 1000)
   }
@@ -110,7 +110,7 @@ class Game {
     this.wordElement.innerHTML = html;
 
     this.currentSymbol = this.wordElement.querySelector('.symbol_current');
-    this.timer()
+    this.timer();
   }
 }
 
