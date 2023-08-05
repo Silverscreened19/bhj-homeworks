@@ -6,6 +6,18 @@ const signinContent = document.getElementById('signin');
 const logoutBtn = document.getElementById('logout_btn');
 
 
+function sayWelcome(id) {
+    userId.textContent = id;
+    signinContent.classList.remove('signin_active');
+    welcome.classList.add('welcome_active');
+}
+
+
+if(localStorage.id) {
+    sayWelcome(localStorage.id);
+}
+
+
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     const xhr = new XMLHttpRequest();
@@ -18,9 +30,7 @@ form.addEventListener('submit', (e) => {
     xhr.addEventListener('load', () => {
         if(xhr.response.success) {
             localStorage.setItem('id', xhr.response.user_id);
-            userId.textContent = xhr.response.user_id;
-            signinContent.classList.remove('signin_active');
-            welcome.classList.add('welcome_active');
+            sayWelcome(localStorage.id)
         } else {
             alert('Wrong credentials');
             form.reset();
